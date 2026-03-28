@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burhan Yousuf Wani — DevOps Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --cyan: #00e5ff;
+      --lime: #aaff00;
+      --slate-900: #0d1117;
+      --slate-800: #161b22;
+      --slate-700: #21262d;
+      --card-bg: #1a2233;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background: var(--slate-900);
+      color: #e2e8f0;
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* GRID BACKGROUND */
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* GLOW */
+    .glow-cyan { text-shadow: 0 0 30px rgba(0,229,255,0.5); }
+    .glow-lime { text-shadow: 0 0 30px rgba(170,255,0,0.5); }
+    .card-glow { box-shadow: 0 0 0 1px rgba(0,229,255,0.1), 0 4px 40px rgba(0,0,0,0.4); }
+    .card-glow:hover { box-shadow: 0 0 0 1px rgba(0,229,255,0.35), 0 8px 60px rgba(0,229,255,0.08); }
+
+    /* TYPING ANIMATION */
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+      color: var(--cyan);
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* NAV */
+    nav {
+      background: rgba(13,17,23,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,229,255,0.1);
+    }
+
+    /* HERO GRADIENT */
+    .hero-gradient {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,229,255,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(170,255,0,0.06) 0%, transparent 60%);
+    }
+
+    /* MONOSPACE */
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .space-mono { font-family: 'Space Mono', monospace; }
+
+    /* ACCENT LINE */
+    .accent-line {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--lime));
+      border-radius: 2px;
+    }
+
+    /* SKILL BAR */
+    .skill-bar-fill {
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--lime));
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), #0099cc);
+      color: #0d1117;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,229,255,0.35);
+    }
+    .btn-outline {
+      border: 1px solid rgba(0,229,255,0.4);
+      color: var(--cyan);
+      transition: all 0.25s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(0,229,255,0.1);
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    /* CARD */
+    .glass-card {
+      background: rgba(26,34,51,0.7);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,229,255,0.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,229,255,0.1);
+    }
+
+    /* TAG */
+    .tech-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--cyan);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* TIMELINE DOT */
+    .timeline-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(0,229,255,0.6);
+      flex-shrink: 0;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+
+    /* PROGRESS BAR CONTAINER */
+    .skill-bar-track {
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    /* MOBILE NAV */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* LEADERSHIP HIGHLIGHT */
+    .leadership-card {
+      background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(170,255,0,0.04));
+      border: 1px solid rgba(0,229,255,0.2);
+    }
+
+    /* CERT BADGE */
+    .cert-badge {
+      background: rgba(170,255,0,0.06);
+      border: 1px solid rgba(170,255,0,0.2);
+      color: #aaff00;
+    }
+
+    /* SCROLL TOP */
+    #scrollTop {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      background: var(--cyan);
+      color: #0d1117;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 999;
+    }
+    #scrollTop.visible { opacity: 1; pointer-events: all; }
+    #scrollTop:hover { transform: translateY(-3px); }
+
+    /* AGREEMENT SECTION SPECIAL */
+    .agreement-bg {
+      background: linear-gradient(135deg, rgba(170,255,0,0.06), rgba(0,229,255,0.06));
+      border: 1px solid rgba(170,255,0,0.25);
+    }
+
+    /* DARK/LIGHT TOGGLE */
+    body.light-mode {
+      background: #f0f4f8;
+      color: #1a202c;
+    }
+    body.light-mode nav { background: rgba(240,244,248,0.9); border-bottom: 1px solid rgba(0,0,0,0.08); }
+    body.light-mode .glass-card { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.08); }
+    body.light-mode .glass-card:hover { border-color: rgba(0,153,204,0.4); }
+    body.light-mode .leadership-card { background: linear-gradient(135deg, rgba(0,153,204,0.06), rgba(0,180,0,0.04)); border-color: rgba(0,153,204,0.2); }
+    body.light-mode .hero-gradient { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,153,204,0.1) 0%, transparent 70%); }
+    body.light-mode { --cyan: #0088bb; --lime: #228800; }
+    body.light-mode .tech-tag { background: rgba(0,136,187,0.1); border-color: rgba(0,136,187,0.3); color: #0088bb; }
+    body.light-mode .section-label { color: #0088bb; }
+    body.light-mode .grid-bg { background-image: linear-gradient(rgba(0,136,187,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,136,187,0.05) 1px, transparent 1px); background-size: 50px 50px; }
+    body.light-mode p, body.light-mode li, body.light-mode span:not(.section-label):not(.tech-tag) { color: #374151; }
+    body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4 { color: #111827; }
+    body.light-mode #scrollTop { background: #0088bb; }
+    body.light-mode .cert-badge { background: rgba(0,120,0,0.08); border-color: rgba(0,120,0,0.25); color: #228800; }
+    body.light-mode .agreement-bg { background: linear-gradient(135deg, rgba(0,150,0,0.06), rgba(0,136,187,0.06)); border-color: rgba(0,150,0,0.25); }
+  </style>
+</head>
+<body class="grid-bg">
+
+<!-- SCROLL TO TOP -->
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up text-sm"></i>
+</div>
+
+<!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="#hero" class="space-mono text-lg font-bold" style="color:var(--cyan)">
+      BYW<span style="color:var(--lime)">.</span>
+    </a>
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+      <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+      <a href="#journey" class="hover:text-cyan-400 transition-colors">Journey</a>
+      <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+      <a href="#certifications" class="hover:text-cyan-400 transition-colors">Certs</a>
+      <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      <button id="themeToggle" class="w-8 h-8 rounded-full flex items-center justify-center border border-opacity-20 hover:border-opacity-50 transition-all" style="border-color:var(--cyan)">
+        <i class="fas fa-sun text-xs" style="color:var(--cyan)" id="themeIcon"></i>
+      </button>
+    </div>
+    <!-- Mobile Hamburger -->
+    <div class="flex items-center gap-3 md:hidden">
+      <button id="themeToggleMob" class="w-8 h-8 rounded-full flex items-center justify-center" style="border:1px solid var(--cyan)">
+        <i class="fas fa-sun text-xs" style="color:var(--cyan)"></i>
+      </button>
+      <button id="menuBtn" class="text-xl" style="color:var(--cyan)">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden mt-3 px-2 pb-3 space-y-1 text-sm font-medium">
+    <a href="#about" class="block py-2 px-3 rounded hover:bg-white/5 transition-colors" onclick="closeMobileMenu()">About</a>
+    <a href="#skills" class="block py-2 px-3 rounded hover:bg-white/5 transition-colors" onclick="closeMobileMenu()">Skills</a>
+    <a href="#journey" class="block py-2 px-3 rounded hover:bg-white/5 transition-colors" onclick="closeMobileMenu()">Journey</a>
+    <a href="#projects" class="block py-2 px-3 rounded hover:bg-white/5 transition-colors" onclick="closeMobileMenu()">Projects</a>
+    <a href="#certifications" class="block py-2 px-3 rounded hover:bg-white/5 transition-colors" onclick="closeMobileMenu()">Certs</a>
+    <a href="#contact" class="block py-2 px-3 rounded hover:bg-white/5 transition-colors" onclick="closeMobileMenu()">Contact</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero" class="hero-gradient min-h-screen flex items-center pt-20 px-6 relative overflow-hidden">
+  <!-- Decorative blobs -->
+  <div class="absolute top-20 right-10 w-72 h-72 rounded-full opacity-5" style="background:var(--cyan);filter:blur(80px);"></div>
+  <div class="absolute bottom-20 left-10 w-56 h-56 rounded-full opacity-5" style="background:var(--lime);filter:blur(80px);"></div>
+
+  <div class="max-w-6xl mx-auto w-full relative z-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="section-label mb-4 reveal">👋 Hello, World!</p>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-none mb-4 reveal">
+          <span style="color:var(--cyan)" class="glow-cyan">Burhan</span><br/>
+          <span class="text-white">Yousuf</span><br/>
+          <span style="color:var(--lime)" class="glow-lime">Wani</span>
+        </h1>
+        <p class="text-lg md:text-xl font-semibold mb-2 reveal" style="color:var(--cyan)">
+          <span id="typingText" class="typing-cursor"></span>
+        </p>
+        <p class="text-slate-400 max-w-md leading-relaxed mb-8 reveal text-sm md:text-base">
+          B.Tech Electronics Graduate with a deep passion for DevOps, Cloud, and AI. Building scalable systems, automating workflows, and continuously expanding the edge of what's possible in tech.
+        </p>
+        <div class="flex gap-4 flex-wrap reveal">
+          <a href="#projects" class="btn-primary px-6 py-3 rounded-lg text-sm font-bold tracking-wider">
+            <i class="fas fa-rocket mr-2"></i>View Projects
+          </a>
+          <a href="#contact" class="btn-outline px-6 py-3 rounded-lg text-sm font-bold tracking-wider">
+            <i class="fas fa-paper-plane mr-2"></i>Contact Me
+          </a>
+        </div>
+        <!-- Quick Stats -->
+        <div class="flex gap-8 mt-10 reveal">
+          <div>
+            <p class="text-2xl font-black" style="color:var(--cyan)">5+</p>
+            <p class="text-xs text-slate-500 mono">Projects</p>
+          </div>
+          <div>
+            <p class="text-2xl font-black" style="color:var(--lime)">6+</p>
+            <p class="text-xs text-slate-500 mono">Certifications</p>
+          </div>
+          <div>
+            <p class="text-2xl font-black text-white">Cloud</p>
+            <p class="text-xs text-slate-500 mono">Azure Focus</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal Card -->
+      <div class="reveal hidden md:block">
+        <div class="glass-card rounded-xl overflow-hidden card-glow">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+            <span class="w-3 h-3 rounded-full bg-red-500 opacity-70"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500 opacity-70"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500 opacity-70"></span>
+            <span class="mono text-xs text-slate-500 ml-2">~/burhan — zsh</span>
+          </div>
+          <div class="p-5 mono text-sm space-y-2">
+            <p><span style="color:var(--lime)">burhan@devops</span><span class="text-slate-500">:</span><span style="color:var(--cyan)">~</span><span class="text-white">$</span> <span class="text-slate-300">whoami</span></p>
+            <p class="text-slate-400 pl-2">Burhan Yousuf Wani — DevOps &amp; Cloud Enthusiast</p>
+            <p class="mt-2"><span style="color:var(--lime)">burhan@devops</span><span class="text-slate-500">:</span><span style="color:var(--cyan)">~</span><span class="text-white">$</span> <span class="text-slate-300">cat skills.txt</span></p>
+            <p class="text-slate-400 pl-2">Cloud | DevOps | AI/ML | Automation</p>
+            <p class="mt-2"><span style="color:var(--lime)">burhan@devops</span><span class="text-slate-500">:</span><span style="color:var(--cyan)">~</span><span class="text-white">$</span> <span class="text-slate-300">echo $LOCATION</span></p>
+            <p class="text-slate-400 pl-2">Delhi, India 🇮🇳</p>
+            <p class="mt-2"><span style="color:var(--lime)">burhan@devops</span><span class="text-slate-500">:</span><span style="color:var(--cyan)">~</span><span class="text-white">$</span> <span class="text-slate-300">./run_mission.sh</span></p>
+            <p style="color:var(--cyan)" class="pl-2 animate-pulse">▶ Building the future, one commit at a time...</p>
+            <p class="text-slate-600 mono text-xs mt-3">status: <span class="text-green-400">ACTIVE</span> | mode: <span style="color:var(--lime)">LEARNING</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-600 text-xs mono text-center reveal">
+      <p class="mb-2">scroll to explore</p>
+      <div class="w-5 h-8 border border-slate-700 rounded-full mx-auto flex items-start justify-center pt-1">
+        <div class="w-1 h-2 rounded-full bg-slate-600 animate-bounce"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section id="about" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">01 — About Me</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Who Am I<span style="color:var(--cyan)">?</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- About card 1 -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background:rgba(0,229,255,0.1)">
+          <i class="fas fa-cloud text-xl" style="color:var(--cyan)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Cloud & DevOps</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Passionate about building robust cloud infrastructure and automating deployment pipelines. Focused on Microsoft Azure and modern DevOps toolchains.</p>
+      </div>
+
+      <!-- About card 2 -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background:rgba(170,255,0,0.08)">
+          <i class="fas fa-brain text-xl" style="color:var(--lime)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-2">AI & Machine Learning</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Deeply interested in AI/ML applications — from natural language processing to agent development. Currently exploring ADK on GCP and MLOps.</p>
+      </div>
+
+      <!-- About card 3 -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background:rgba(255,100,100,0.08)">
+          <i class="fas fa-cogs text-xl text-red-400"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Problem Solver</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Analytical thinker who enjoys tackling real-world problems with structured, scalable, and elegant solutions — whether in code, systems design, or team workflows.</p>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="mt-12 glass-card rounded-xl p-8 card-glow reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(0,229,255,0.1)">
+          <i class="fas fa-graduation-cap" style="color:var(--cyan)"></i>
+        </div>
+        <h3 class="text-xl font-bold">Education</h3>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="timeline-dot mt-1"></div>
+        <div>
+          <p class="font-bold text-lg">B.Tech — Electronics Engineering</p>
+          <p class="text-slate-400 text-sm mb-3">Core Specialization: Computer Science Fundamentals</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag">Data Structures</span>
+            <span class="tech-tag">Algorithms</span>
+            <span class="tech-tag">Machine Learning</span>
+            <span class="tech-tag">Embedded Systems</span>
+            <span class="tech-tag">Signal Processing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ LEADERSHIP ═══════════════════════════ -->
+<section id="leadership" class="py-24 px-6" style="background:rgba(0,229,255,0.02)">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">02 — Leadership</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Initiative & <span style="color:var(--lime)">Impact</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="leadership-card rounded-xl p-6 reveal">
+        <div class="text-3xl mb-3">⭐</div>
+        <h3 class="text-lg font-bold mb-2">Azure Credential Agreement System</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Took the initiative to design and build a secure Azure Access Agreement Portal — a system that enforces legal agreements before granting cloud credentials. Solved a real accountability problem in team-based cloud environments.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="tech-tag">Azure</span>
+          <span class="tech-tag">Security</span>
+          <span class="tech-tag">HTML/JS</span>
+          <span class="tech-tag">Tailwind</span>
+        </div>
+      </div>
+
+      <div class="leadership-card rounded-xl p-6 reveal">
+        <div class="text-3xl mb-3">🚀</div>
+        <h3 class="text-lg font-bold mb-2">Team Coordination & Project Groups</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Leads and coordinates academic and project teams, establishing structured workflows for collaboration. Creates accountability frameworks that help groups stay aligned and productive toward shared goals.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="tech-tag">Team Lead</span>
+          <span class="tech-tag">Agile</span>
+          <span class="tech-tag">Scrum</span>
+        </div>
+      </div>
+
+      <div class="leadership-card rounded-xl p-6 reveal">
+        <div class="text-3xl mb-3">👥</div>
+        <h3 class="text-lg font-bold mb-2">Culture of Accountability</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Encourages responsibility and mutual trust within teams. Brings a professional mindset to academic environments, bridging the gap between student projects and real-world engineering standards.</p>
+      </div>
+
+      <div class="leadership-card rounded-xl p-6 reveal">
+        <div class="text-3xl mb-3">💡</div>
+        <h3 class="text-lg font-bold mb-2">Innovation-Driven Mindset</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Proactively identifies gaps in workflows and builds tools to fill them — from secure portals to automation scripts — embodying the DevOps philosophy of continuous improvement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
+<section id="skills" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">03 — Skills</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Technical <span style="color:var(--cyan)">Arsenal</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <!-- Programming -->
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="fas fa-code text-sm" style="color:var(--cyan)"></i>
+          <span class="section-label text-xs">Programming</span>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">Python</span><span class="mono text-xs text-slate-500">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">C++</span><span class="mono text-xs text-slate-500">75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">JavaScript</span><span class="mono text-xs text-slate-500">70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Web Dev -->
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="fas fa-globe text-sm" style="color:var(--lime)"></i>
+          <span class="section-label text-xs" style="color:var(--lime)">Web Dev</span>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">HTML/CSS</span><span class="mono text-xs text-slate-500">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">React</span><span class="mono text-xs text-slate-500">65%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">Tailwind CSS</span><span class="mono text-xs text-slate-500">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="fas fa-infinity text-sm text-purple-400"></i>
+          <span class="section-label text-xs text-purple-400">DevOps</span>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">Git & GitHub</span><span class="mono text-xs text-slate-500">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">Docker</span><span class="mono text-xs text-slate-500">60%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">CI/CD</span><span class="mono text-xs text-slate-500">55%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="55"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud -->
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="fas fa-cloud text-sm text-blue-400"></i>
+          <span class="section-label text-xs text-blue-400">Cloud</span>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">Microsoft Azure</span><span class="mono text-xs text-slate-500">70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">GCP</span><span class="mono text-xs text-slate-500">45%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="45"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="text-sm">Azure DevOps</span><span class="mono text-xs text-slate-500">50%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="50"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools grid -->
+    <div class="glass-card rounded-xl p-6 card-glow reveal">
+      <p class="section-label text-xs mb-4">Tools & Technologies</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="tech-tag">Python</span><span class="tech-tag">C++</span><span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">React</span><span class="tech-tag">Flask</span><span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3</span><span class="tech-tag">Tailwind</span><span class="tech-tag">Git</span>
+        <span class="tech-tag">Docker</span><span class="tech-tag">GitHub Actions</span><span class="tech-tag">Azure</span>
+        <span class="tech-tag">GCP</span><span class="tech-tag">NLP</span><span class="tech-tag">Scikit-learn</span>
+        <span class="tech-tag">TensorFlow</span><span class="tech-tag">Linux</span><span class="tech-tag">Bash</span>
+        <span class="tech-tag">VS Code</span><span class="tech-tag">Jupyter</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DEVOPS JOURNEY ═══════════════════════════ -->
+<section id="journey" class="py-24 px-6" style="background:rgba(170,255,0,0.01)">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">04 — Roadmap</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">DevOps <span style="color:var(--lime)">Journey</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Cloud -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="text-3xl mb-3">☁️</div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--cyan)">Cloud Computing</h3>
+        <p class="text-slate-400 text-sm">Designing scalable, fault-tolerant infrastructure on Azure. Learning IaC with Terraform and ARM templates.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <div class="flex-1 skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+          <span class="mono text-xs text-slate-500">Active</span>
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="text-3xl mb-3">🔄</div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--lime)">DevOps</h3>
+        <p class="text-slate-400 text-sm">CI/CD pipelines, containerization, configuration management and monitoring for continuous delivery.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <div class="flex-1 skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div>
+          <span class="mono text-xs text-slate-500">Active</span>
+        </div>
+      </div>
+
+      <!-- DevSecOps -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="text-3xl mb-3">🔐</div>
+        <h3 class="font-bold text-lg mb-1 text-red-400">DevSecOps</h3>
+        <p class="text-slate-400 text-sm">Integrating security into the DevOps pipeline — SAST, DAST, secret scanning, compliance checks.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <div class="flex-1 skill-bar-track"><div class="skill-bar-fill" data-width="40"></div></div>
+          <span class="mono text-xs text-slate-500">Learning</span>
+        </div>
+      </div>
+
+      <!-- FinOps -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="text-3xl mb-3">💰</div>
+        <h3 class="font-bold text-lg mb-1 text-yellow-400">FinOps</h3>
+        <p class="text-slate-400 text-sm">Cloud cost optimization and financial accountability frameworks to maximize ROI on cloud spend.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <div class="flex-1 skill-bar-track"><div class="skill-bar-fill" data-width="30"></div></div>
+          <span class="mono text-xs text-slate-500">Exploring</span>
+        </div>
+      </div>
+
+      <!-- MLOps -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="text-3xl mb-3">🤖</div>
+        <h3 class="font-bold text-lg mb-1 text-purple-400">MLOps</h3>
+        <p class="text-slate-400 text-sm">Bridging ML and DevOps — model versioning, experiment tracking, automated retraining pipelines.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <div class="flex-1 skill-bar-track"><div class="skill-bar-fill" data-width="45"></div></div>
+          <span class="mono text-xs text-slate-500">Learning</span>
+        </div>
+      </div>
+
+      <!-- DevAIOps -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal" style="border-color:rgba(0,229,255,0.25)">
+        <div class="text-3xl mb-3">🧠</div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--cyan)">DevAIOps</h3>
+        <p class="text-slate-400 text-sm">The cutting edge — AI-augmented DevOps, intelligent automation, and AI agent-driven operations.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <div class="flex-1 skill-bar-track"><div class="skill-bar-fill" data-width="35"></div></div>
+          <span class="mono text-xs" style="color:var(--cyan)">Frontier</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PROJECTS ═══════════════════════════ -->
+<section id="projects" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">05 — Portfolio</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Featured <span style="color:var(--cyan)">Projects</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <!-- MAJOR PROJECT: SmartHire -->
+    <div class="glass-card rounded-xl p-8 card-glow reveal mb-6" style="border-color:rgba(0,229,255,0.2)">
+      <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+        <div>
+          <span class="cert-badge px-2 py-0.5 rounded text-xs font-bold mono mb-2 inline-block">⭐ MAJOR PROJECT</span>
+          <h3 class="text-2xl font-extrabold mt-1">SmartHire</h3>
+          <p class="text-slate-400 text-sm">AI-powered job recommendation & candidate matching system</p>
+        </div>
+        <a href="https://github.com/Orrm23" target="_blank" class="btn-outline px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
+      <p class="text-slate-300 text-sm leading-relaxed mb-4">An intelligent platform that uses NLP and ML algorithms to match candidates with relevant job listings based on their skills, experience, and preferences. Features semantic job search, resume parsing, and personalized recommendations.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="tech-tag">React</span><span class="tech-tag">Flask</span><span class="tech-tag">NLP</span>
+        <span class="tech-tag">Scikit-learn</span><span class="tech-tag">Python</span><span class="tech-tag">REST API</span>
+      </div>
+    </div>
+
+    <!-- Project Grid -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Hurreme -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="flex items-start justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(170,255,0,0.08)">
+            <i class="fas fa-shopping-bag text-sm" style="color:var(--lime)"></i>
+          </div>
+          <a href="https://github.com/Orrm23" target="_blank" class="text-slate-500 hover:text-white transition-colors text-sm">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Hurreme E-Commerce</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Full-stack e-commerce platform with product listing, cart, and checkout functionality. Strong emphasis on responsive design, user experience, and mobile-first layout.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">React</span>
+        </div>
+      </div>
+
+      <!-- Wildfire -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="flex items-start justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-orange-900/30">
+            <i class="fas fa-fire text-sm text-orange-400"></i>
+          </div>
+          <a href="https://github.com/Orrm23" target="_blank" class="text-slate-500 hover:text-white transition-colors text-sm">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Wildfire Prediction Project</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">ML-based wildfire prediction and risk analysis system using environmental and satellite data. Tackles a critical real-world problem with data-driven insights.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tech-tag">Python</span><span class="tech-tag">ML</span><span class="tech-tag">Pandas</span><span class="tech-tag">Matplotlib</span>
+        </div>
+      </div>
+
+      <!-- Study Helper -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="flex items-start justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-900/30">
+            <i class="fas fa-book-open text-sm text-blue-400"></i>
+          </div>
+          <a href="https://github.com/Orrm23" target="_blank" class="text-slate-500 hover:text-white transition-colors text-sm">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Study Helper Web App</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">A student productivity dashboard with organized resources, notifications, deadline tracking, and collaborative study tools for academic management.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
+
+      <!-- Vocab Builder -->
+      <div class="glass-card rounded-xl p-6 card-glow reveal">
+        <div class="flex items-start justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-purple-900/30">
+            <i class="fas fa-spell-check text-sm text-purple-400"></i>
+          </div>
+          <a href="https://github.com/Orrm23" target="_blank" class="text-slate-500 hover:text-white transition-colors text-sm">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Vocabulary Builder App</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Interactive vocabulary learning application with daily word challenges, quiz mode, and spaced repetition for effective word retention and mastery.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tech-tag">JavaScript</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ AGREEMENT PROJECT ═══════════════════════════ -->
+<section id="agreement" class="py-24 px-6" style="background:rgba(0,229,255,0.01)">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">06 — Unique Feature</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Agreement <span style="color:var(--lime)">Portal</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="agreement-bg rounded-2xl p-8 md:p-12 reveal">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mono mb-4" style="background:rgba(170,255,0,0.1);color:var(--lime);border:1px solid rgba(170,255,0,0.3)">
+            🔒 SECURITY PROJECT
+          </div>
+          <h3 class="text-2xl font-extrabold mb-4">Azure Access Agreement Portal</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">A purpose-built secure credential-sharing system that requires users to digitally agree to legal terms before receiving access to Azure cloud credentials. Designed to address the accountability gap in shared cloud lab environments.</p>
+          <ul class="space-y-3 text-sm text-slate-400">
+            <li class="flex items-start gap-3"><span style="color:var(--lime)">✓</span> Legal agreement enforcement before credential access</li>
+            <li class="flex items-start gap-3"><span style="color:var(--lime)">✓</span> Password masking with controlled reveal system</li>
+            <li class="flex items-start gap-3"><span style="color:var(--lime)">✓</span> Audit trail & digital signature capture</li>
+            <li class="flex items-start gap-3"><span style="color:var(--lime)">✓</span> Clean, professional UI with guided flow</li>
+            <li class="flex items-start gap-3"><span style="color:var(--lime)">✓</span> Solves real-world security and accountability problem</li>
+          </ul>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="tech-tag">HTML</span><span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">JavaScript</span><span class="tech-tag">Azure</span>
+          </div>
+        </div>
+        <!-- Mock UI Preview -->
+        <div class="glass-card rounded-xl overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500 opacity-70"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 opacity-70"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 opacity-70"></span>
+            <span class="mono text-xs text-slate-500 ml-1">Azure Access Portal</span>
+          </div>
+          <div class="p-5 space-y-4">
+            <div class="text-center">
+              <div class="text-2xl mb-1">🔐</div>
+              <p class="font-bold text-sm">Azure Credential Access</p>
+              <p class="text-xs text-slate-500 mono">Agreement Required</p>
+            </div>
+            <div class="rounded-lg p-3 text-xs text-slate-400 mono leading-relaxed" style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05)">
+              By accessing these credentials, I agree to use them responsibly and only for approved activities...
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <div class="w-4 h-4 rounded" style="background:var(--cyan);"></div>
+              <span class="text-slate-400">I agree to the Terms & Conditions</span>
+            </div>
+            <div class="rounded-lg p-2 flex items-center justify-between text-xs" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06)">
+              <span class="text-slate-500">Password: ••••••••••••</span>
+              <button class="text-xs px-2 py-0.5 rounded" style="background:rgba(0,229,255,0.1);color:var(--cyan);">Reveal</button>
+            </div>
+            <div class="btn-primary text-center py-2 rounded-lg text-xs font-bold cursor-default">
+              ✓ Access Granted
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CERTIFICATIONS ═══════════════════════════ -->
+<section id="certifications" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">07 — Credentials</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Certifications & <span style="color:var(--cyan)">Courses</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-start gap-3">
+          <span class="cert-badge w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm">🤖</span>
+          <div>
+            <p class="font-bold text-sm">ADK Agent Development</p>
+            <p class="text-slate-500 text-xs mono mt-0.5">Google Cloud Platform</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-start gap-3">
+          <span class="cert-badge w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm">🧠</span>
+          <div>
+            <p class="font-bold text-sm">Deep Learning Internship</p>
+            <p class="text-slate-500 text-xs mono mt-0.5">Industry Certification</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-start gap-3">
+          <span class="cert-badge w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm">🌐</span>
+          <div>
+            <p class="font-bold text-sm">NPTEL German Language</p>
+            <p class="text-slate-500 text-xs mono mt-0.5">NPTEL / IIT</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-start gap-3">
+          <span class="cert-badge w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm">☁️</span>
+          <div>
+            <p class="font-bold text-sm">DevOps & Cloud Learning</p>
+            <p class="text-slate-500 text-xs mono mt-0.5">Ongoing · Azure Focus</p>
+            <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded" style="background:rgba(0,229,255,0.1);color:var(--cyan);">In Progress</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-start gap-3">
+          <span class="cert-badge w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm">📊</span>
+          <div>
+            <p class="font-bold text-sm">Machine Learning Internship</p>
+            <p class="text-slate-500 text-xs mono mt-0.5">Industry Experience</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-5 card-glow reveal">
+        <div class="flex items-start gap-3">
+          <span class="cert-badge w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm">⚡</span>
+          <div>
+            <p class="font-bold text-sm">Embedded Systems Course</p>
+            <p class="text-slate-500 text-xs mono mt-0.5">Hardware & Firmware</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ HOBBIES ═══════════════════════════ -->
+<section id="hobbies" class="py-24 px-6" style="background:rgba(0,229,255,0.01)">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4"><p class="section-label">08 — Beyond Code</p></div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-3 reveal">Hobbies & <span style="color:var(--lime)">Interests</span></h2>
+    <div class="accent-line mb-12 reveal"></div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="glass-card rounded-xl p-5 text-center card-glow reveal">
+        <div class="text-4xl mb-3">📚</div>
+        <p class="font-bold text-sm mb-1">Reading</p>
+        <p class="text-slate-500 text-xs">The Hindu · Economic Times · TechCrunch</p>
+      </div>
+      <div class="glass-card rounded-xl p-5 text-center card-glow reveal">
+        <div class="text-4xl mb-3">💡</div>
+        <p class="font-bold text-sm mb-1">Learning</p>
+        <p class="text-slate-500 text-xs">Always exploring new tech stacks & tools</p>
+      </div>
+      <div class="glass-card rounded-xl p-5 text-center card-glow reveal">
+        <div class="text-4xl mb-3">🎤</div>
+        <p class="font-bold text-sm mb-1">Public Speaking</p>
+        <p class="text-slate-500 text-xs">Discussions, debates, and knowledge sharing</p>
+      </div>
+      <div class="glass-card rounded-xl p-5 text-center card-glow reveal">
+        <div class="text-4xl mb-3">💻</div>
+        <p class="font-bold text-sm mb-1">Building</p>
+        <p class="text-slate-500 text-xs">Real-world projects that solve real problems</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section id="contact" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="reveal mb-4"><p class="section-label">09 — Let's Connect</p></div>
+    <h2 class="text-4xl md:text-6xl font-extrabold mb-4 reveal leading-tight">
+      Let's Build Something<br/><span style="color:var(--cyan)">Amazing</span> Together
+    </h2>
+    <p class="text-slate-400 max-w-xl mx-auto mb-12 reveal leading-relaxed">Whether you have a project idea, a collaboration proposal, or just want to talk tech — my inbox is always open.</p>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-12">
+      <!-- Email -->
+      <a href="mailto:burhanusuf7@gmail.com" class="glass-card rounded-xl p-5 card-glow reveal flex flex-col items-center gap-3 group">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(0,229,255,0.1)">
+          <i class="fas fa-envelope" style="color:var(--cyan)"></i>
+        </div>
+        <div>
+          <p class="text-xs text-slate-500 mono mb-0.5">Email</p>
+          <p class="font-bold text-sm group-hover:text-cyan-400 transition-colors">burhanusuf7@gmail.com</p>
+        </div>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/Orrm23" target="_blank" class="glass-card rounded-xl p-5 card-glow reveal flex flex-col items-center gap-3 group">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.06)">
+          <i class="fab fa-github text-white"></i>
+        </div>
+        <div>
+          <p class="text-xs text-slate-500 mono mb-0.5">GitHub</p>
+          <p class="font-bold text-sm group-hover:text-white transition-colors">github.com/Orrm23</p>
+        </div>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/burhan-yusuf" target="_blank" class="glass-card rounded-xl p-5 card-glow reveal flex flex-col items-center gap-3 group">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-blue-900/30">
+          <i class="fab fa-linkedin-in text-blue-400"></i>
+        </div>
+        <div>
+          <p class="text-xs text-slate-500 mono mb-0.5">LinkedIn</p>
+          <p class="font-bold text-sm group-hover:text-blue-400 transition-colors">linkedin.com/in/burhan-yusuf</p>
+        </div>
+      </a>
+    </div>
+
+    <a href="mailto:burhanusuf7@gmail.com" class="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-xl text-base font-bold reveal">
+      <i class="fas fa-paper-plane"></i> Send a Message
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="py-8 px-6 text-center border-t border-white/5">
+  <div class="max-w-6xl mx-auto">
+    <p class="space-mono font-bold mb-1" style="color:var(--cyan)">Burhan Yousuf Wani</p>
+    <p class="text-slate-600 text-xs mono">Built with ❤️ using HTML &amp; Tailwind CSS · Delhi, India</p>
+    <p class="text-slate-700 text-xs mono mt-1">© 2025 — All rights reserved</p>
+  </div>
+</footer>
+
+<script>
+  // ─── TYPING ANIMATION ───────────────────────────────────
+  const phrases = [
+    "Aspiring DevOps Engineer",
+    "Cloud Computing Enthusiast",
+    "AI & ML Explorer",
+    "Automation Advocate",
+    "Agent Developer (GCP ADK)"
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typingText');
+
+  function type() {
+    const phrase = phrases[pi];
+    el.textContent = deleting ? phrase.substring(0, ci--) : phrase.substring(0, ci++);
+    if (!deleting && ci > phrase.length) { deleting = true; setTimeout(type, 1500); return; }
+    if (deleting && ci < 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    setTimeout(type, deleting ? 50 : 80);
+  }
+  type();
+
+  // ─── SCROLL REVEAL ───────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Animate skill bars inside revealed elements
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        // Also trigger standalone skill bars
+        if (e.target.classList.contains('skill-bar-fill')) {
+          e.target.style.width = e.target.dataset.width + '%';
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── SCROLL TOP BUTTON ────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // ─── MOBILE MENU ─────────────────────────────────────────
+  document.getElementById('menuBtn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  // ─── THEME TOGGLE ────────────────────────────────────────
+  let light = false;
+  function toggleTheme() {
+    light = !light;
+    document.body.classList.toggle('light-mode', light);
+    document.querySelectorAll('#themeIcon, .fa-sun').forEach(i => {
+      i.className = light ? 'fas fa-moon text-xs' : 'fas fa-sun text-xs';
+      i.style.color = 'var(--cyan)';
+    });
+  }
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  document.getElementById('themeToggleMob').addEventListener('click', toggleTheme);
+
+  // ─── STAGGERED REVEAL DELAY ──────────────────────────────
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6) * 0.08 + 's';
+  });
+</script>
+</body>
+</html>
